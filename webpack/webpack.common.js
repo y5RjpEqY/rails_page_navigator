@@ -31,6 +31,7 @@ module.exports = {
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
+        modules: [srcDir, "node_modules"]
     },
     plugins: [
         new CopyPlugin({
