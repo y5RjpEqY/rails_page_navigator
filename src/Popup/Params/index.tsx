@@ -4,12 +4,8 @@ import { useEnhance } from "./enhance";
 import { Input, Card, Space, Typography } from "antd"
 const { Text, Link } = Typography
 
-type Props = {
-    path: string
-}
-
-export function Params(props: Props) {
-    const { params, updateParamsValue, url, isValidUrl  } = useEnhance(props);
+export function Params() {
+    const { params, updateParamsValue, url, isValidUrl  } = useEnhance();
 
     return (
         <div style={containerStyle}>

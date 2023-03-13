@@ -3,26 +3,26 @@ import { createRoot } from "react-dom/client";
 
 import { useEnhance } from "./enhance";
 
+import { StateProvider } from "./StateProvider";
 import { Select } from "./Select";
 import { Params } from "./Params";
 
 function Popup() {
-    const { selectedPath, onSelect, options } = useEnhance();
+    useEnhance();
     return (
         <div style={containerStyle}>
-            <Select
-              onSelect={onSelect}
-              options={options}
-            />
-            {selectedPath && (
-                <Params path={selectedPath} />
-            )}
+            <Select />
+            <Params />
         </div>
     )
 }
 
 const root = createRoot(document.getElementById("root")!);
-root.render(<Popup />)
+root.render(
+    <StateProvider>
+        <Popup />
+    </StateProvider>
+)
 
 const containerStyle = {
     width: "640px",

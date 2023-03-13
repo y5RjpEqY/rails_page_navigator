@@ -4,16 +4,8 @@ import { useEnhance } from "./enhance";
 
 import { Select as AntSelect } from "antd";
 
-import { Option } from "common/types";
-
-type Props = {
-    onSelect: (value: string) => void,
-    options: Option[]
-}
-
-export function Select(props: Props) {
-    const { onSelect, options, } = props;
-    const {  filterOption, filterSort } = useEnhance();
+export function Select() {
+    const {  options, filterOption, filterSort, onSelect } = useEnhance();
     return (
         <div style={containerStyle}>
             <AntSelect

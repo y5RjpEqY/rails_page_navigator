@@ -1,27 +1,19 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useContext } from "react";
 import axios from "axios";
-import { Option } from "common/types";
+import { StateContext } from "./StateProvider";
+import { actionTypes } from "common/actionTypes";
 
 import { host, ignoreList } from "common/const";
 
 export function useEnhance() {
-    const [selectedPath, setSelectedPath] = useState<string>("")
-    const [pathList, setPathList] = useState<string[]>([]);
+    const { dispatch } = useContext(StateContext);
 
     useEffect(() => {
         axios.get(`${host}/rails/info/routes?path=/`)
             .then(({ data: { fuzzy } }) => {
-                setPathList(extractPath(fuzzy));
+                dispatch({ type: actionTypes.SET_PATHS, payload: extractPath(fuzzy) })
             })
     }, []);
-
-    const onSelect = useCallback((value: string) => setSelectedPath(value), []);
-
-    const options: Option[] = useMemo(() =>
-            pathList.map((path) => ({ value: path, label: path })),
-        [pathList])
-
-    return { selectedPath, onSelect, options }
 }
 
 function extractPath(data: string[]): string[] {
