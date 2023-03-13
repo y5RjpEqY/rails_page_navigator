@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import { Option, Path, PathList } from "common/types";
 
-import { host } from "../common/const";
+import { host } from "common/const";
 
 export function useEnhance() {
     const [selectedPath, setSelectedPath] = useState<Path>()
@@ -17,20 +17,11 @@ export function useEnhance() {
 
     const onSelect = useCallback((value: string) => setSelectedPath(pathList[value]), [pathList]);
 
-    const filterOption = useCallback((input: string, option: Option | undefined) => {
-        return (option?.label ?? '').includes(input)
-    }, []);
-
-    const filterSort = useCallback((optionA: Option, optionB: Option) =>
-            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase()),
-        [])
-
-
     const options: Option[] = useMemo(() =>
             Object.entries(pathList).map(([key, path]) => ({ value: key, label: path.path })),
         [pathList])
 
-    return { selectedPath, onSelect, options, filterOption, filterSort }
+    return { selectedPath, onSelect, options }
 }
 
 function extractPath(data: string[]): PathList {

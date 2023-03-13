@@ -10,7 +10,7 @@ type Props = {
     path: Path
 }
 
-export function Jump(props: Props) {
+export function Params(props: Props) {
     const { path: { params } } = props;
     const { updateParamsValue, url, isValidUrl } = useEnhance(props);
 
