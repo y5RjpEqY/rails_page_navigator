@@ -9,6 +9,9 @@ export type ActionType = {
 } | {
     type: typeof actionTypes.SET_SELECTED_PATH,
     payload: string
+} | {
+    type: typeof actionTypes.SET_URL,
+    payload: string
 }
 
 export const reducer: React.Reducer<Store, ActionType> = (state, action) => {
@@ -17,6 +20,8 @@ export const reducer: React.Reducer<Store, ActionType> = (state, action) => {
             return { ...state, paths: action.payload }
         case actionTypes.SET_SELECTED_PATH:
             return { ...state, selectedPath: action.payload }
+        case actionTypes.SET_URL:
+            return { ...state, url: action.payload }
         default:
             return state
     }

@@ -1,11 +1,10 @@
 import React from "react";
 import { useEnhance } from "./enhance";
 
-import { Input, Card, Space, Typography } from "antd"
-const { Text, Link } = Typography
+import { Input, Card, Space } from "antd"
 
 export function Params() {
-    const { params, updateParamsValue, url, isValidUrl  } = useEnhance();
+    const { params, updateParamsValue  } = useEnhance();
 
     return (
         <div style={containerStyle}>
@@ -17,14 +16,6 @@ export function Params() {
                         />
                     </Card>
                 ))}
-                <div>
-                    url:{" "}
-                    {isValidUrl ? (
-                        <Link strong href={url} target="_blank">{url}</Link>
-                    ) : (
-                        <Text strong>{url}</Text>
-                    )}
-                </div>
             </Space>
         </div>
     )

@@ -6,6 +6,7 @@ import { useEnhance } from "./enhance";
 import { StateProvider } from "./StateProvider";
 import { Select } from "./Select";
 import { Params } from "./Params";
+import { Jump } from "./Jump";
 
 function Popup() {
     useEnhance();
@@ -13,6 +14,7 @@ function Popup() {
         <div style={containerStyle}>
             <Select />
             <Params />
+            <Jump />
         </div>
     )
 }
