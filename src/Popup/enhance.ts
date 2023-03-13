@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
-import { Option, Path, PathList } from "common/types";
+import { Option } from "common/types";
 
-import { host } from "common/const";
+import { host, ignoreList } from "common/const";
 
 export function useEnhance() {
-    const [selectedPath, setSelectedPath] = useState<Path>()
-    const [pathList, setPathList] = useState<PathList>({});
+    const [selectedPath, setSelectedPath] = useState<string>("")
+    const [pathList, setPathList] = useState<string[]>([]);
 
     useEffect(() => {
         axios.get(`${host}/rails/info/routes?path=/`)
@@ -15,19 +15,18 @@ export function useEnhance() {
             })
     }, []);
 
-    const onSelect = useCallback((value: string) => setSelectedPath(pathList[value]), [pathList]);
+    const onSelect = useCallback((value: string) => setSelectedPath(value), []);
 
     const options: Option[] = useMemo(() =>
-            Object.entries(pathList).map(([key, path]) => ({ value: key, label: path.path })),
+            pathList.map((path) => ({ value: path, label: path })),
         [pathList])
 
     return { selectedPath, onSelect, options }
 }
 
-function extractPath(data: string[]): PathList {
-    return [...new Set(data)].reduce((acc, value, idx) => {
-        const path = value.replace("(.:format)", "")
-        const params = path.split("/").filter(e => /^:.*id$/.test(e))
-        return { [idx.toString()]: { path, params }, ...acc }
-    }, {})
+function extractPath(data: string[]): string[] {
+    return [...new Set(data)].reduce((acc: string[], value: string) => {
+        const path = value.replace("(.:format)", "");
+        return ignoreList.includes(path) ? acc : [...acc, path];
+    }, [])
 }

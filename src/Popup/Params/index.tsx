@@ -1,18 +1,15 @@
 import React from "react";
 import { useEnhance } from "./enhance";
-import { Input, Card, Space, Typography } from "antd"
 
+import { Input, Card, Space, Typography } from "antd"
 const { Text, Link } = Typography
 
-import { Path } from "common/types";
-
 type Props = {
-    path: Path
+    path: string
 }
 
 export function Params(props: Props) {
-    const { path: { params } } = props;
-    const { updateParamsValue, url, isValidUrl } = useEnhance(props);
+    const { params, updateParamsValue, url, isValidUrl  } = useEnhance(props);
 
     return (
         <div style={containerStyle}>

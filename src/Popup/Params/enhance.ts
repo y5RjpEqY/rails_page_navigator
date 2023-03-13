@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Path } from "common/types";
-import { host } from "../../common/const";
+import { host } from "common/const";
 
 type Props = {
-    path: Path
+    path: string
 }
 
 export function useEnhance(props: Props) {
-    const { path: { path, params } } = props;
+    const { path } = props;
 
     const [paramsValue, setParamsValue] = useState<{ [key: string]: string }>({});
+
+    const params  = path.split("/").filter(e => /^:.*id$/.test(e))
 
     const updateParamsValue = useCallback(
         (key: string, value: string) => setParamsValue((prevState) => ({ ...prevState, [key]: value})),
@@ -26,5 +27,5 @@ export function useEnhance(props: Props) {
         [path]
     )
 
-    return { updateParamsValue, url, isValidUrl }
+    return { params, updateParamsValue, url, isValidUrl }
 }
