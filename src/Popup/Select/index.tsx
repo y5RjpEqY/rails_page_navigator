@@ -7,7 +7,7 @@ import { Select as AntSelect } from "antd";
 export function Select() {
     const {  options, filterOption, filterSort, onSelect } = useEnhance();
     return (
-        <div style={containerStyle}>
+        <div>
             <AntSelect
               showSearch
               onSelect={onSelect}
@@ -19,10 +19,4 @@ export function Select() {
             />
         </div>
     )
-}
-
-const containerStyle = {
-    width: "640px",
-    height: "320px",
-    padding: "16px 16px 0"
 }

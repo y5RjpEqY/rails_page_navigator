@@ -9,7 +9,7 @@ export function Jump() {
 
     return (
         <div style={containerStyle}>
-            url:{" "}
+            <Text>url:</Text>
             {isValidUrl ? (
                 <Link strong href={url} target="_blank">{url}</Link>
             ) : (

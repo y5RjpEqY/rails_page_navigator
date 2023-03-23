@@ -2,12 +2,13 @@ import React from "react";
 import { useEnhance } from "./enhance";
 
 import { Input, Card, Space } from "antd"
+import { Container } from "./styles";
 
 export function Params() {
     const { params, updateParamsValue  } = useEnhance();
 
     return (
-        <div style={containerStyle}>
+        <Container>
             <Space direction="vertical" size="middle">
                 {params.map(param => (
                     <Card key={param} title={param} style={cardStyle}>
@@ -17,13 +18,8 @@ export function Params() {
                     </Card>
                 ))}
             </Space>
-        </div>
+        </Container>
     )
-}
-
-const containerStyle = {
-    display: "flex",
-    justifyContent: "center"
 }
 
 const cardStyle = {
