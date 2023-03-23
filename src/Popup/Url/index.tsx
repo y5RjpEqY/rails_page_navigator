@@ -4,7 +4,7 @@ import { useEnhance } from "./enhance";
 import { Typography } from "antd"
 const { Text, Link } = Typography
 
-export function Jump() {
+export function Url() {
     const { url, isValidUrl } = useEnhance();
 
     return (

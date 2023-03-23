@@ -5,7 +5,7 @@ import { useEnhance } from "./enhance";
 import { StateProvider } from "./StateProvider";
 import { Select } from "./Select";
 import { Params } from "./Params";
-import { Jump } from "./Jump";
+import { Url } from "./Url";
 import { Container } from "./styles"
 
 function Popup() {
@@ -14,7 +14,7 @@ function Popup() {
         <Container>
             <Select />
             <Params />
-            <Jump />
+            <Url />
         </Container>
     )
 }
