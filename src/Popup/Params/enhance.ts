@@ -12,7 +12,7 @@ export function useEnhance() {
 
   const [paramsValue, setParamsValue] = useState<{ [key: string]: string }>({});
 
-  const params = selectedPath.split("/").filter((e) => /^:.*id$/.test(e));
+  const params = selectedPath.split("/").filter((e) => /^:.+$/.test(e));
 
   const updateParamsValue = useCallback(
     (key: string, value: string) =>
