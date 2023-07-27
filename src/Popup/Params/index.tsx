@@ -1,7 +1,7 @@
 import React from "react";
 import { useEnhance } from "./enhance";
 
-import { Input, Card, Space } from "antd";
+import { Input, Space, Form } from "antd";
 import { Container } from "./styles";
 
 export function Params() {
@@ -10,11 +10,22 @@ export function Params() {
   return (
     <Container>
       <Space direction="vertical" size="middle">
-        {params.map((param) => (
-          <Card key={param} title={param} style={cardStyle}>
-            <Input onChange={(e) => updateParamsValue(param, e.target.value)} />
-          </Card>
-        ))}
+        <Form
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 300 }}
+        >
+          {params.map((param) => (
+            <Form.Item key={param} label={param} style={cardStyle}>
+              <Input
+                onChange={(e) => {
+                  console.log(e);
+                  updateParamsValue(param, e.target.value);
+                }}
+              />
+            </Form.Item>
+          ))}
+        </Form>
       </Space>
     </Container>
   );
