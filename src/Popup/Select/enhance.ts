@@ -1,25 +1,25 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
+import Fuse from "fuse.js";
 import { StateContext } from "../StateProvider";
 import { actionTypes } from "common/actionTypes";
-
-import { Option } from "common/types";
 
 export function useEnhance() {
     const { state: { paths }, dispatch } = useContext(StateContext);
 
-    const options: Option[] = useMemo(() =>
-            paths.map((path) => ({ value: path, label: path })),
-        [paths]);
+    const [filteredPaths, setFilteredPaths ] = useState<string[]>(paths)
 
     const onSelect = useCallback((value: string) => dispatch({ type: actionTypes.SET_SELECTED_PATH, payload: value }), [])
 
-    const filterOption = useCallback((input: string, option: Option | undefined) => {
-        return (option?.label ?? '').includes(input)
-    }, []);
+    const fuse = useMemo(() => {
+        return new Fuse(paths, { threshold: 0.5, shouldSort: true, useExtendedSearch: true })
+    }, [paths]);
 
-    const filterSort = useCallback((optionA: Option, optionB: Option) =>
-            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase()),
-        []);
+    const onSearch = (input: string) => {
+        setFilteredPaths(fuse.search(input).map(v => v.item))
+    }
 
-    return { options, onSelect, filterOption, filterSort }
+    const options =
+        filteredPaths.map((path) => ({ value: path, label: path }))
+
+    return { options, onSelect, onSearch }
 }

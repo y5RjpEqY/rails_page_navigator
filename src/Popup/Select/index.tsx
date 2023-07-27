@@ -5,7 +5,7 @@ import { useEnhance } from "./enhance";
 import { Select as AntSelect } from "antd";
 
 export function Select() {
-    const {  options, filterOption, filterSort, onSelect } = useEnhance();
+    const {  options, onSearch, onSelect } = useEnhance();
     return (
         <div>
             <AntSelect
@@ -13,8 +13,8 @@ export function Select() {
               onSelect={onSelect}
               style={{ width: "100%"}}
               optionFilterProp="children"
-              filterOption={filterOption}
-              filterSort={filterSort}
+              onSearch={onSearch}
+              filterOption={false}
               autoFocus={true}
               options={options}
             />
