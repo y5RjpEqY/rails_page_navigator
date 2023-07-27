@@ -15,6 +15,7 @@ export function Select() {
               optionFilterProp="children"
               filterOption={filterOption}
               filterSort={filterSort}
+              autoFocus={true}
               options={options}
             />
         </div>
